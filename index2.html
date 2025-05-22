@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Vida - Una Historia de Amor y Gratitud</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-attachment: fixed;
+            color: #333;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header principal */
+        .main-header {
+            text-align: center;
+            padding: 80px 0;
+            color: white;
+            background: rgba(0,0,0,0.2);
+            border-radius: 25px;
+            margin: 30px 0;
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255,255,255,0.1);
+            animation: slideDown 1.2s ease-out;
+        }
+
+        .main-title {
+            font-size: 3.2em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            background: linear-gradient(45deg, #FFD700, #FFA500, #FF69B4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .intro {
+            font-size: 1.1em;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.8;
+        }
+
+        /* Secciones principales */
+        .section {
+            background: rgba(255,255,255,0.95);
+            margin: 50px 0;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 0.6s ease;
+            border-left: 6px solid #e74c3c;
+        }
+
+        .section.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 2.3em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(45deg, #e74c3c, #f39c12);
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2em;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        /* Sección Sobre Mí */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .about-image {
+            text-align: center;
+            font-size: 8em;
+            color: #e74c3c;
+            opacity: 0.8;
+        }
+
+        .about-text {
+            font-size: 1.2em;
+            color: #2c3e50;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        /* Sección Familia */
+        .family-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .family-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            border-radius: 18px;
+            text-align: center;
+            transform: translateY(0);
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .family-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+        }
+
+        .family-icon {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .family-title {
+            font-size: 1.6em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .family-description {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .flags {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .flag {
+            font-size: 2.2em;
+            padding: 10px 15px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .flag:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.15) rotate(10deg);
+        }
+
+        /* Sección Carrera */
+        .career-section {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+            border-left: 6px solid #f39c12;
+        }
+
+        .career-content {
+            text-align: center;
+        }
+
+        .career-icon {
+            font-size: 5em;
+            color: #d35400;
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        .career-text {
+            font-size: 1.3em;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .pride-text {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: #d35400;
+            background: rgba(255,255,255,0.7);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+
+        /* Reflexión final */
+        .reflection {
+            background: linear-gradient(135deg, #a8e6cf 0%, #88d8c0 100%);
+            text-align: center;
+            border-left: 6px solid #27ae60;
+        }
+
+        .reflection-text {
+            font-size: 1.4em;
+            color: #2c3e50;
+            font-style: italic;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .gratitude-box {
+            background: rgba(255,255,255,0.8);
+            padding: 30px;
+            border-radius: 20px;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .gratitude-title {
+            font-size: 1.6em;
+            color: #27ae60;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .gratitude-list {
+            font-size: 1.2em;
+            color: #2c3e50;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0,0,0,0.8);
+            color: white;
+            text-align: center;
+            padding: 50px;
+            border-radius: 20px;
+            margin-top: 60px;
+            backdrop-filter: blur(10px);
+        }
+
+        .footer-text {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+
+        .footer-heart {
+            font-size: 1.5em;
+            color: #e74c3c;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-title { font-size: 2.5em; }
+            .subtitle { font-size: 1.2em; }
+            .section { padding: 35px 25px; }
+            .section-title { font-size: 2em; }
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .about-image { font-size: 6em; }
+            .family-grid { grid-template-columns: 1fr; }
+            .career-text { font-size: 1.2em; }
+            .reflection-text { font-size: 1.3em; }
+        }
+
+        @media (max-width: 480px) {
+            .container { padding: 15px; }
+            .main-header { padding: 50px 20px; }
+            .section { margin: 30px 0; padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Principal -->
+        <header class="main-header">
+            <h1 class="main-title">Mi Historia Personal</h1>
+            <p class="subtitle">44 años de vida plena y gratitud</p>
+            <p class="intro">Una mujer que celebra cada momento, cada logro y cada bendición recibida</p>
+        </header>
+
+        <!-- Sección Sobre Mí -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Quien Soy</h2>
+                <p class="section-subtitle">Mi esencia y mi camino</p>
+            </div>
+            <div class="about-content">
+                <div class="about-image">👩‍💼</div>
+                <div class="about-text">
+                    <p>Soy una <span class="highlight">mujer adulta de 44 años</span> que ha aprendido a valorar cada etapa de la vida. Mi corazón está lleno de gratitud por las experiencias vividas y las personas que han formado parte de mi camino.</p>
+                    <p>He encontrado mi propósito en ser <span class="highlight">madre, compañera y profesional</span>, roles que desempeño con amor y dedicación cada día.</p>
+                    <p>Mi mayor orgullo es haber construido una vida auténtica, donde cada decisión tomada me ha llevado a ser la mujer que soy hoy: <span class="highlight">feliz de ser lo que he sido</span>.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Familia -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Mi Familia</h2>
+                <p class="section-subtitle">El amor que trasciende fronteras</p>
+            </div>
+            <div class="family-grid">
+                <div class="family-card">
+                    <span class="family-icon">👨‍👩‍👧‍👦</span>
+                    <h3 class="family-title">Mis Hijos</h3>
+                    <p class="family-description">Soy la orgullosa madre de dos hermosos hijos, cada uno único y especial. Representan la diversidad y riqueza cultural de nuestra familia.</p>
+                    <div class="flags">
+                        <span class="flag" title="Mi hijo colombiano">🇨🇴</span>
+                        <span class="flag" title="Mi hijo venezolano">🇻🇪</span>
+                    </div>
+                    <p class="family-description">En ellos veo el futuro, la esperanza y el amor incondicional que solo una madre puede entender.</p>
+                </div>
+                
+                <div class="family-card">
+                    <span class="family-icon">💑</span>
+                    <h3 class="family-title">Mi Pareja</h3>
+                    <p class="family-description">Junto a mi pareja del país vecino, hemos construido un hogar donde el amor no conoce fronteras ni nacionalidades.</p>
+                    <p class="family-description">Nuestra relación es un testimonio de que el amor verdadero une corazones más allá de cualquier diferencia cultural o geográfica.</p>
+                    <p class="family-description">Juntos formamos una familia multicultural llena de tradiciones, idiomas y experiencias enriquecedoras.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Carrera -->
+        <section class="section career-section">
+            <div class="section-header">
+                <h2 class="section-title">Mi Trayectoria</h2>
+                <p class="section-subtitle">Una carrera construida con dedicación</p>
+            </div>
+            <div class="career-content">
+                <span class="career-icon">📋</span>
+                <p class="career-text">A lo largo de mi carrera profesional, he desempeñado el rol de <strong>secretaria</strong>, una profesión que me ha permitido desarrollar habilidades valiosas y contribuir de manera significativa en cada organización donde he trabajado.</p>
+                <p class="career-text">Mi trabajo no es solo lo que hago, sino parte integral de quien soy. He aprendido el valor de la organización, la eficiencia, la comunicación efectiva y el servicio a otros.</p>
+                <div class="pride-text">
+                    Me siento profundamente feliz y orgullosa de ser lo que he sido. Cada día de trabajo ha sido una oportunidad de crecimiento personal y profesional.
+                </div>
+            </div>
+        </section>
+
+        <!-- Reflexión Final -->
+        <section class="section reflection">
+            <div class="section-header">
+                <h2 class="section-title">Mi Filosofía de Vida</h2>
+                <p class="section-subtitle">Reflexiones desde el corazón</p>
+            </div>
+            <p class="reflection-text">"La verdadera felicidad no está en tener una vida perfecta, sino en amar profundamente la vida que has construido con tus propias manos, corazón y decisiones."</p>
+            
+            <div class="gratitude-box">
+                <h3 class="gratitude-title">Por lo que estoy agradecida:</h3>
+                <div class="gratitude-list">
+                    ✨ Por mis hermosos hijos que llenan mi vida de alegría<br>
+                    ❤️ Por mi pareja que comparte conmigo este camino<br>
+                    🌟 Por mi carrera que me ha dado propósito y satisfacción<br>
+                    🙏 Por cada experiencia que me ha hecho más fuerte<br>
+                    💫 Por la mujer en la que me he convertido a los 44 años
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="footer-text">Una vida vivida con amor, propósito y gratitud infinita</p>
+            <p>Creado con <span class="footer-heart">❤️</span> para compartir mi historia</p>
+        </footer>
+    </div>
+
+    <script>
+        // Animación al hacer scroll
+        function animateOnScroll() {
+            const sections = document.querySelectorAll('.section');
+            
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const triggerBottom = window.innerHeight / 5 * 4;
+                
+                if (sectionTop < triggerBottom) {
+                    section.classList.add('visible');
+                }
+            });
+        }
+
+        // Efecto en las banderas
+        document.querySelectorAll('.flag').forEach(flag => {
+            flag.addEventListener('click', function() {
+                this.style.animation = 'none';
+                setTimeout(() => {
+                    this.style.animation = '';
+                }, 10);
+                
+                // Crear efecto de "celebración"
+                for (let i = 0; i < 6; i++) {
+                    setTimeout(() => {
+                        this.style.transform = `scale(1.2) rotate(${Math.random() * 20 - 10}deg)`;
+                        setTimeout(() => {
+                            this.style.transform = '';
+                        }, 150);
+                    }, i * 100);
+                }
+            });
+        });
+
+        // Efecto parallax suave en el background
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.3;
+            document.body.style.backgroundPosition = `center ${rate}px`;
+        });
+
+        // Activar animaciones
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+
+        // Efecto de entrada para el header
+        setTimeout(() => {
+            document.querySelector('.main-header').style.opacity = '1';
+        }, 300);
+    </script>
+</body>
+</html>
